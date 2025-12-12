@@ -1,0 +1,149 @@
+/* Design tokens */
+:root {
+  --fsh-primary: #6366f1; /* indigo-500 */
+  --fsh-primary-600: #4f46e5;
+  --fsh-slate-50: #f8fafc;
+  --fsh-slate-100: #f1f5f9;
+  --fsh-slate-200: #e2e8f0;
+  --fsh-slate-300: #cbd5e1;
+  --fsh-slate-700: #334155;
+  --fsh-page: #EEF2FF;
+}
+
+.fsh-page {
+  min-height: 100vh;
+  background: radial-gradient(1200px 600px at -10% -10%, rgba(99,102,241,0.10), transparent 60%),
+              radial-gradient(1000px 500px at 110% -10%, rgba(217,70,239,0.08), transparent 55%),
+              var(--fsh-page);
+}
+
+.fsh-card {
+  background: #fff;
+  border: 1px solid rgba(203,213,225,0.6);
+  border-radius: 16px;
+  box-shadow: 0 8px 12px rgba(15,23,42,0.08);
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.fsh-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(15,23,42,0.10);
+  border-color: rgba(99,102,241,0.25);
+}
+
+.fsh-header-card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff, #f5f3ff 40%, #eef2ff);
+  border-color: rgba(99,102,241,0.25);
+  box-shadow: 0 16px 28px rgba(99,102,241,0.18);
+  background-size: 200% 200%;
+  animation: fshGradientShift 8s ease infinite;
+}
+
+@keyframes fshGradientShift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.fsh-progress {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #e5e7eb, #e2e8f0);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.fsh-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #10b981, #22c55e);
+  transition: width .3s ease;
+  position: relative;
+}
+.fsh-progress-fill::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  transform: translateX(-100%);
+  animation: fshProgressSheen 2.2s linear infinite;
+}
+
+@keyframes fshProgressSheen { to { transform: translateX(100%); } }
+
+.fsh-habit {
+  transition: background .15s ease, transform .12s ease, box-shadow .2s ease;
+  box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+  position: relative;
+}
+.fsh-habit:hover { transform: translateY(-1px); }
+.fsh-habit:active { transform: scale(0.985); }
+.fsh-habit:after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(250px 250px at center, rgba(99,102,241,0.12), transparent 60%);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+.fsh-habit:active:after { opacity: 1; }
+
+.fsh-habit-icon {
+  background: linear-gradient(135deg, var(--fsh-slate-100), #ffffff);
+  border: 1px solid var(--fsh-slate-200);
+  box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+}
+
+.fsh-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.08);
+}
+.fsh-chip[data-status="success"] { box-shadow: 0 0 0 2px rgba(34,197,94,0.15), 0 0 16px rgba(34,197,94,0.25); }
+.fsh-chip[data-status="fail"] { box-shadow: 0 0 0 2px rgba(239,68,68,0.15), 0 0 16px rgba(239,68,68,0.25); }
+.fsh-chip[data-status="skip"] { box-shadow: 0 0 0 2px rgba(245,158,11,0.15), 0 0 16px rgba(245,158,11,0.25); }
+
+.fsh-action-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.fsh-action-row > button {
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-weight: 800;
+}
+
+.fsh-icon-btn {
+  transition: background .15s ease, border-color .15s ease;
+}
+.fsh-icon-btn:hover { background: #f8fafc; border-color: var(--fsh-slate-300); }
+
+/* Bars */
+.fsh-bar {
+  background: linear-gradient(180deg, #34d399, #22c55e);
+  box-shadow: 0 6px 14px rgba(34,197,94,0.25);
+  transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+  transform-origin: bottom;
+  transform: scaleY(0.2);
+  animation: fshBarGrow .35s ease forwards;
+}
+.fsh-bar:hover { transform: translateY(-2px) scaleY(1.02); box-shadow: 0 8px 18px rgba(34,197,94,0.35); }
+
+@keyframes fshBarGrow { to { transform: scaleY(1); } }
+
+ 
+
+/* Entrances */
+.fsh-fade-in { animation: fshFadeUp .25s ease both; }
+@keyframes fshFadeUp {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fly-in dropdown */
+.fsh-fly { animation: fshFlyIn .15s ease both; transform-origin: top right; }
+@keyframes fshFlyIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
